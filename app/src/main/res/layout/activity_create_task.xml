@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".CreateTaskActivity">
+
+<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+                                                 android:id="@+id/input_task_title"
+                                                 android:layout_height="wrap_content">
+    <EditText
+            android:id="@+id/task_title"
+            android:layout_width="match_parent"
+            android:hint="Task Title"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            app:backgroundTint="@color/white"
+            android:ems="10"
+            android:hapticFeedbackEnabled="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"/>
+</android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+                                                   android:id="@+id/input_task_desc"
+                                                   android:layout_height="wrap_content">
+        <EditText
+                android:id="@+id/task_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoCorrect|textMultiLine|textPersonName"
+                android:hint="Task Description"
+                app:backgroundTint="@color/white"
+                android:ems="10"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:maxLines="3"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <!--TODO: Check the hint english-->
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="24dp"
+                  android:layout_gravity="center" android:orientation="horizontal" android:layout_height="wrap_content">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_marginStart="26dp"
+              android:fontFamily="sans-serif-light"
+              android:gravity="center"
+    android:text="Task should be done within: "/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:id="@+id/should_be_done_in"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:textColor="@color/colorAccent"
+                  android:layout_marginStart="4dp"
+                  android:fontFamily="sans-serif-light"
+                  android:layout_height="wrap_content"
+        android:text="@string/showExpectedTime"/>
+    </LinearLayout>
+        <android.support.v7.widget.AppCompatSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="25"
+                android:ems="10"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:maxLength="3"
+                android:id="@+id/task_expected_time"/>
+
+    <TextView android:layout_width="240dp" android:layout_height="wrap_content"
+              android:text="'some Error'"
+              android:textColor="@color/highPriority"
+              android:id="@+id/tv_error"
+              android:fontFamily="sans-serif-condensed-light"
+              android:layout_marginTop="8dp"
+              android:gravity="center"
+              android:layout_gravity="center"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView
+                android:text="Priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:id="@+id/textView" android:textSize="16sp"
+                android:textStyle="bold" android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"/>
+        <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/colorAccent"
+                android:id="@+id/task_priority"
+                android:layout_margin="26dp"
+                android:layout_marginStart="24dp" android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:spinnerMode="dropdown"/>
+    </LinearLayout>
+    <android.support.design.button.MaterialButton
+            android:text="Save"
+            android:background="@color/colorAccent"
+            android:onClick="onSaveTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            app:rippleColor="#E6757575"
+            app:cornerRadius="18dp"
+            android:id="@+id/save_button" android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            tools:targetApi="lollipop"/>
+    <TextView
+            android:text="Multi-Tasks"
+            android:fontFamily="sans-serif-light"
+            android:textSize="12sp"
+            android:layout_marginEnd="28dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:layout_height="wrap_content" android:id="@+id/multiple_task_option"/>
+
+    <TextView android:layout_width="280dp" android:layout_height="wrap_content"
+              android:textColor="@color/colorAccent"
+              android:id="@+id/tv_quotes"
+              android:fontFamily="sans-serif-condensed-light"
+              android:layout_marginTop="64dp"
+              android:gravity="center"
+              android:lineSpacingExtra="3dp"
+              android:layout_gravity="center" android:textStyle="italic" tools:text="'some Quote'"/>
+
+
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Refresh" android:id="@+id/refresh_items" android:icon="@drawable/ic_refresh"
+          app:showAsAction="always"/>
+    <item android:title="First Task First"
+          android:id="@+id/menu_set_first_task"/>
+</menu>

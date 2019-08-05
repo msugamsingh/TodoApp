@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00bfff</color>
+    <color name="colorPrimaryDark">#3BB6E4</color>
+    <color name="colorAccent">#00bfff</color>
+    <color name="highPriority">#BFFF1010</color>
+    <color name="mediumPriority">#BFFFC108</color>
+    <color name="lowPriority">#E634C93A</color>
+    <color name="bottomNav">#CCFFFFFF</color>
+    <color name="lightTextGrey">#757575</color>
+    <color name="shadow">#66928E8E</color>
+    <color name="electricBlue">#07A2E9</color>
+    <color name="slateGray">#05152E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="lightGray">#DDDDDD</color>
+    <color name="lightCyan">#8000BFFF</color>
+</resources>

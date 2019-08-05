@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Todo App</string>
+    <string name="action_settings">Settings</string>
+    <string name="c_time">%d</string>
+    <string name="about">Timer App v1.0.0</string>
+    <string name="about_me">Sugam Singh (@msugamsingh)</string>
+    <string name="about_co">Forol, Inc. (@forolinc)</string>
+    <string name="completed_in">Completed In: %d min</string>
+    <string name="expeted_time">Expected Time: %d min</string>
+    <string name="time_result">Points: %s</string>
+    <string name="stopIn">Stop In: %s</string>
+    <string name="showExpectedTime">%d min</string>
+</resources>

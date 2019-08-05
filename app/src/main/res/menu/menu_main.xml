@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.msugamsingh.todoapp.todoapp.msugamsingh.todoapp.MainActivity">
+    <item android:id="@+id/action_settings"
+          android:title="Me"
+          android:icon="@drawable/ic_me"
+          android:orderInCategory="100"/>
+    <item android:title="To-dos"
+          android:id="@+id/action_todo"
+          android:icon="@drawable/ic_format_list_numbered"/>
+    <item android:title="Timer"
+          android:id="@+id/action_timer"
+          android:icon="@drawable/ic_timer_black_24dp"/>
+    <item android:title=""
+          android:enabled="false"/>
+    <item android:title="Checked"
+          android:id="@+id/action_completed"
+          android:icon="@drawable/ic_todo_check"/>
+</menu>
