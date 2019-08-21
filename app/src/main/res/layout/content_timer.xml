@@ -141,12 +141,14 @@
                 android:layout_width="wrap_content"
                 android:layout_gravity="end"
                 android:layout_margin="6dp"
+                android:contentDescription="@string/stop_timer"
                 app:fabSize="mini"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_stop"/>
         <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_play"
                 android:layout_margin="6dp"
+                android:contentDescription="@string/start_timer"
                 app:fabSize="mini"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -157,6 +159,7 @@
                 android:layout_margin="6dp"
                 app:fabSize="mini"
                 android:layout_gravity="start"
+                android:contentDescription="@string/pause_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_pause"

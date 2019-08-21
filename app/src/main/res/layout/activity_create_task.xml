@@ -15,7 +15,7 @@
         <EditText
                 android:id="@+id/task_title"
                 android:layout_width="match_parent"
-                android:hint="Task Title"
+                android:hint="@string/task_title"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:textColor="@color/lightTextGrey"
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textAutoCorrect|textMultiLine|textPersonName"
-                android:hint="Task Description"
+                android:hint="@string/task_description"
                 app:backgroundTint="@color/white"
                 android:ems="10"
                 android:textColor="@color/lightTextGrey"
@@ -46,10 +46,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
-                android:maxLines="3"/>
+                android:maxLines="3" android:autofillHints="no"/>
     </android.support.design.widget.TextInputLayout>
 
-    <!--TODO: Check the hint english-->
     <LinearLayout android:layout_width="match_parent"
                   android:layout_marginTop="24dp"
                   android:layout_gravity="center"
@@ -62,7 +61,7 @@
                   android:fontFamily="sans-serif-light"
                   android:gravity="center"
                   android:textColor="@color/lightTextGrey"
-                  android:text="Task should be completed in: "/>
+                  android:text="@string/task_should_complete_in"/>
 
         <TextView android:layout_width="wrap_content"
                   android:id="@+id/should_be_done_in"
@@ -99,7 +98,7 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:orientation="horizontal">
         <TextView
-                android:text="Priority"
+                android:text="@string/priority_add_task"
                 android:layout_width="wrap_content"
                 android:textColor="@color/lightTextGrey"
                 android:layout_height="wrap_content"
@@ -119,7 +118,7 @@
                 android:spinnerMode="dropdown"/>
     </LinearLayout>
     <android.support.design.button.MaterialButton
-            android:text="Save"
+            android:text="@string/add_save"
             android:background="@color/colorAccent"
             android:onClick="onSaveTask"
             android:layout_width="wrap_content"
@@ -132,10 +131,10 @@
             android:layout_marginEnd="8dp"
             tools:targetApi="lollipop"/>
     <TextView
-            android:text="Multi-Tasks"
+            android:text="@string/multi_tasks"
             android:fontFamily="sans-serif-light"
             android:textSize="12sp"
-            android:padding="4dp"
+            android:padding="8dp"
             android:textColor="@color/lightTextGrey"
             android:layout_marginEnd="28dp"
             android:layout_width="wrap_content"
@@ -151,6 +150,5 @@
               android:gravity="center"
               android:lineSpacingExtra="3dp"
               android:layout_gravity="center" android:textStyle="italic" tools:text="'some Quote'"/>
-
 
 </LinearLayout>

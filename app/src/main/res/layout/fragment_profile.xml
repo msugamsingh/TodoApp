@@ -13,7 +13,7 @@
                                                    android:layout_height="wrap_content">
 
         <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:hint="Your Name"
+                  android:hint="@string/your_name"
                   android:inputType="textPersonName"
                   android:id="@+id/user_name"
                   android:backgroundTint="@color/colorAccent"
@@ -37,16 +37,16 @@
             <LinearLayout
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:padding="2dp"
+                    android:padding="6dp"
                     android:id="@+id/stats"
                     android:orientation="horizontal">
 
                 <ImageView android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           app:srcCompat="@drawable/ic_stats"/>
+                           app:srcCompat="@drawable/ic_stats" android:contentDescription="@string/stat_content_des"/>
 
                 <TextView android:layout_width="wrap_content"
-                          android:text="Statistics"
+                          android:text="@string/statistics"
                           android:layout_marginStart="4dp"
                           android:fontFamily="sans-serif-light"
                           android:textColor="@color/colorAccent"
@@ -58,17 +58,18 @@
             <LinearLayout
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:padding="2dp"
+                    android:padding="6dp"
                     android:id="@+id/settings"
                     android:orientation="horizontal">
 
                 <ImageView android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           app:srcCompat="@drawable/ic_settings"/>
+
+                           app:srcCompat="@drawable/ic_settings" android:contentDescription="@string/settings"/>
 
 
                 <TextView android:layout_width="wrap_content"
-                          android:text="Settings"
+                          android:text="@string/settings"
                           android:layout_marginStart="4dp"
                           android:fontFamily="sans-serif-light"
                           android:textColor="@color/colorAccent"
@@ -82,7 +83,7 @@
                           android:layout_height="wrap_content">
 
                 <Switch
-                        android:text="Dark Mode                          "
+                        android:text="Dark Mode      "
                         android:textColor="@color/lightTextGrey"
                         android:checked="false"
                         android:layout_margin="8dp"
@@ -104,7 +105,7 @@
             <LinearLayout
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:padding="2dp"
+                    android:padding="6dp"
                     android:id="@+id/instruction"
                     android:orientation="horizontal">
 
@@ -127,7 +128,7 @@
             <LinearLayout
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:padding="2dp"
+                    android:padding="6dp"
                     android:id="@+id/about"
                     android:orientation="horizontal">
 

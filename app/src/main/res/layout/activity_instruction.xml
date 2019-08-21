@@ -20,7 +20,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
-                          android:text="Step 1: Tap on the add button at the bottom navigation bar to make a task."/>
+                          android:text="@string/step_1"/>
 
 
             </LinearLayout>
@@ -32,7 +32,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
-                          android:text="Step 2: Add title, description, time and priority for the task."/>
+                          android:text="@string/step_2"/>
 
 
             </LinearLayout>
@@ -44,7 +44,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
-                          android:text="Note: If you want to save multiple tasks at once, use 'Multi-task'."/>
+                          android:text="@string/note_1"/>
 
                 <ImageView android:layout_width="wrap_content" android:layout_height="150dp"
                            android:layout_gravity="center_horizontal"
@@ -60,7 +60,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
-                          android:text="Note: The tasks will be ordered by their priority."/>
+                          android:text="@string/note_2"/>
 
                 <ImageView android:layout_width="wrap_content" android:layout_height="200dp"
                            android:layout_gravity="center_horizontal"
@@ -76,13 +76,13 @@
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
-                          android:text="Step3: Tap on task you want to accomplish."/>
+                          android:text="@string/step_3"/>
 
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="4dp"
-                          android:text="Note: Don't tap on the title of the task, this will mark that task as completed."/>
+                          android:text="@string/note_3"/>
 
             </LinearLayout>
 
@@ -93,7 +93,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
-                          android:text="Step 4: Start the timer and start working."/>
+                          android:text="@string/step_4"/>
 
                 <ImageView android:layout_width="200dp" android:layout_height="200dp"
                            android:layout_gravity="center_horizontal"
@@ -103,31 +103,31 @@
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
-                          android:text="Note: If you won't be able to complete the task in the expected time, start the timer again and stop when completed."/>
+                          android:text="@string/note_4"/>
 
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="2dp"
-                          android:text="Note: Tap on 'Done' button when task completes, this will record the data and redirect you to the To-Do tab. Now mark your task as completed."/>
+                          android:text="@string/note_5"/>
 
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="2dp"
-                          android:text="Note: The data won't be recorded if you put the 4TR Productivity App in the background or lock the device when the timer is running."/>
+                          android:text="@string/note_6"/>
 
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="2dp"
-                          android:text="Note: The screen will stay awake when the timer is running, don't worry! this won't drain much battery and this will be solved really soon. (Really really soon) "/>
+                          android:text="@string/note_7"/>
 
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="2dp"
-                          android:text="Note: Turn the brightness down and enable dark mode to save battery."/>
+                          android:text="@string/note_8"/>
 
             </LinearLayout>
 
@@ -138,7 +138,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:textColor="@color/lightTextGrey"
                           android:layout_height="wrap_content"
-                          android:text="Step 5: To see your completed tasks go to 'Checked' tab."/>
+                          android:text="@string/step_5"/>
             </LinearLayout>
 
             <LinearLayout android:layout_width="match_parent" android:layout_margin="4dp"
@@ -150,7 +150,7 @@
                           android:textSize="18sp"
                           android:layout_gravity="center_horizontal"
                           android:layout_height="wrap_content"
-                          android:text="Please read this!"/>
+                          android:text="@string/please_read_this"/>
 
                 <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
                            android:layout_gravity="center_horizontal"
@@ -169,7 +169,7 @@
                           android:textSize="18sp"
                           android:layout_gravity="center_horizontal"
                           android:layout_height="wrap_content"
-                          android:text="Please Support Me!"/>
+                          android:text="@string/please_support_me"/>
 
             </LinearLayout>
 
