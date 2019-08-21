@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#00BFFF</color>-->
+    <color name="colorPrimary">#EE044A</color>
+    <!--<color name="colorPrimary">#F5430B</color>-->
+    <color name="colorPrimaryDark">#060914</color>
+    <!--<color name="colorAccent">#</00BFFF<color>-->
+    <!--<color name="colorAccent">#F5430B</color>-->
+    <color name="colorAccent">#EE044A</color>
+    <color name="bottomNav">#CC757575</color>
+    <color name="lightTextGrey">#f8f8f8</color>
+    <color name="BlueGray">#000</color>
+    <color name="white">#060914</color>
+    <color name="lightGray">#242424</color>
+    <color name="lightf8">#CC757575</color>
+    <color name="lightCyan">#8000BFFF</color>
+    <color name="iconColor">#f8f8f8</color>
+    <color name="mainCardColor">#1D1E33</color>
+    <color name="cardStrokeColor">#757575</color>
+    <color name="completedColor">#D9EE044A</color>
+</resources>
+
+
+<!--A SQLiteConnection object for database '/data/user/0/com.msugamsingh.todoapp/databases/taskapp.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.-->
