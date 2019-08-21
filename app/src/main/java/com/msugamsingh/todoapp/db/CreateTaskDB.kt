@@ -14,9 +14,11 @@ import com.msugamsingh.todoapp.db.TaskEntry._ID
 
 private const val completedDefault = 0
 
-class CreateTaskDB(context: Context) : SQLiteOpenHelper(context,
+class CreateTaskDB(context: Context) : SQLiteOpenHelper(
+    context,
     DATABASE_NAME, null,
-    DATABASE_VERSION) {
+    DATABASE_VERSION
+) {
 
     private val SQL_CREATE_ENTRIES = """
             CREATE TABLE $TABLE_NAME ($_ID INTEGER PRIMARY KEY,

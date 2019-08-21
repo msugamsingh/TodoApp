@@ -11,9 +11,7 @@ class TimerExpiredReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         NotificationUtil.showTimerExpired(context)
-
         PrefUtil.setTimerState(context, TimerActivity.TimerState.Stopped)
         PrefUtil.setAlarmTime(context, 0)
-
     }
 }

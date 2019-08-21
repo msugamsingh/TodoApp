@@ -1,12 +1,13 @@
 package com.msugamsingh.todoapp
 
 import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import com.msugamsingh.todoapp.db.TaskDBTable
@@ -36,10 +37,35 @@ class FragmentMain : Fragment(), TaskAdapter.TaskClickListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v =  inflater.inflate(R.layout.fragment_main, container, false)
-        if (taskAdapter.itemCount == 0) v.tv_no_task.visibility = View.VISIBLE
+        val v = inflater.inflate(R.layout.fragment_main, container, false)
+        if (taskAdapter.itemCount == 0) {
+            v.tv_no_task.visibility = View.VISIBLE
+            v.play_a_game.visibility = View.VISIBLE
+        }
+
+        v.play_a_game.setOnClickListener {
+            var intent = context!!.packageManager.getLaunchIntentForPackage("com.msugamsingh.pingthepenguin")
+            if (intent == null) {
+                intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://play.google.com/store/apps/details?id=com.msugamsingh.pingthepenguin")
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+
         taskDBTable = TaskDBTable(context!!)
         getTimerStopTime = PrefUtil.getRecordedTime(context!!)
+        if (PrefUtil.getIfToShowQuote(context!!)) {
+            if (!PrefUtil.getIfQuoteShown(context!!)) {
+                v.quote_of_the_day.text = resources.getString(R.string.quoteForTheDayString).format(quotesList.random())
+                v.quote_of_the_day.visibility = View.VISIBLE
+                v.quote_of_the_day.setOnClickListener {
+                    PrefUtil.setIfQuoteShown(context!!, true)
+                    it.visibility = View.GONE
+                }
+            }
+        }
+
         return v
     }
 
@@ -69,12 +95,20 @@ class FragmentMain : Fragment(), TaskAdapter.TaskClickListener {
             TaskDBTable(context!!).getIncompleteTasks(),
             this
         )
-        if (taskAdapter.itemCount == 0) tv_no_task.visibility = View.VISIBLE
+        if (taskAdapter.itemCount == 0) {
+            tv_no_task.visibility = View.VISIBLE
+            play_a_game.visibility = View.VISIBLE
+        }
     }
 
     private fun refreshLayout() = changeFragment(fragmentManager!!, FragmentMain())
 
     override fun onResume() {
+        // TODO check if this solves that problem or else change back to refresh list
+//        rv.adapter = TaskAdapter(
+//            TaskDBTable(context!!).getIncompleteTasks(),
+//            this
+//        )
         refreshList()
         getTimerStopTime = PrefUtil.getRecordedTime(context!!)
         super.onResume()
@@ -91,17 +125,15 @@ class FragmentMain : Fragment(), TaskAdapter.TaskClickListener {
                 changeFragment(fragmentManager!!, fragmentTimer)
             } else {
                 PrefUtil.setRecordingTime(context!!, 0)
-                Log.d("TimeCalculation", "onTaskClick(): recorded time pref: ${PrefUtil.getRecordedTime(context!!)}")
                 val fragmentTimer = FragmentTimer()
                 val bundle = Bundle()
                 bundle.putParcelable(TASK_OBJECT, task)
                 fragmentTimer.arguments = bundle
                 changeFragment(fragmentManager!!, fragmentTimer)
             }
-        }
-        else Toast.makeText(
+        } else Toast.makeText(
             context!!,
-            "You can't open any task while you are in between a task.",
+            "You can't open any task when you are in the middle of a task.",
             Toast.LENGTH_SHORT
         ).show()
     }
@@ -110,7 +142,7 @@ class FragmentMain : Fragment(), TaskAdapter.TaskClickListener {
         val task = taskAdapter.getTask(position)
         val dialog = AlertDialog.Builder(context!!)
         dialog.setTitle("Are you sure?")
-        dialog.setMessage("On continue, the task will be deleted.")
+        dialog.setMessage("On continue, this task will be deleted.")
         dialog.setPositiveButton("Continue") { _: DialogInterface, _: Int ->
             taskDBTable.deleteTask(task)
             refreshLayout()
@@ -133,7 +165,6 @@ class FragmentMain : Fragment(), TaskAdapter.TaskClickListener {
             taskDBTable.setIsComplete(task)
             taskDBTable.updateTaskDoneTime(task, 0)
         }
-        Log.d("checkbox", "position is $position")
         MainActivity.makeSound(context!!, R.raw.drop)
         Toast.makeText(context!!, "Task done", Toast.LENGTH_SHORT).show()
         refreshLayout()
@@ -149,7 +180,7 @@ class FragmentMain : Fragment(), TaskAdapter.TaskClickListener {
                 refreshLayout()
                 true
             }
-            R.id.menu_set_first_task-> {
+            R.id.menu_set_first_task -> {
                 firstTaskFirst()
                 true
             }

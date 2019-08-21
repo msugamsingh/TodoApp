@@ -1,7 +1,9 @@
 package com.msugamsingh.todoapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
@@ -16,15 +18,16 @@ class CreateTaskActivity : AppCompatActivity() {
 
     var priorityFromSpinner = Priority.HIGH_PRIORITY
     var expectedTimerFromSeekBar = 25
-    var ifMultipleOptionIsOn = false
-    val TAG = CreateTaskActivity::class.java.simpleName
+    private var ifMultipleOptionIsOn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_task)
         supportActionBar?.elevation = 0f
-        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.white_drawable))
+        supportActionBar?.title = "Add Task"
+        supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.white_drawable))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         should_be_done_in.text = resources.getString(R.string.showExpectedTime).format(expectedTimerFromSeekBar)
         tv_error.visibility = View.INVISIBLE
@@ -50,18 +53,18 @@ class CreateTaskActivity : AppCompatActivity() {
         }
 
         ifMultipleOptionIsOn = PrefUtil.getIfMultipleOptionIsOn(this)
-        if (ifMultipleOptionIsOn) multiple_task_option.setTextColor(resources.getColor(R.color.colorAccent))
+        if (ifMultipleOptionIsOn) multiple_task_option.setTextColor(ContextCompat.getColor(this, R.color.colorAccent))
 
 
         multiple_task_option.setOnClickListener {
-            if (ifMultipleOptionIsOn) {
+            ifMultipleOptionIsOn = if (ifMultipleOptionIsOn) {
                 PrefUtil.setIfMultipleOptionIsOn(this, false)
-                multiple_task_option.setTextColor(resources.getColor(R.color.lightTextGrey))
-                ifMultipleOptionIsOn = false
+                multiple_task_option.setTextColor(ContextCompat.getColor(this, R.color.lightTextGrey))
+                false
             } else {
                 PrefUtil.setIfMultipleOptionIsOn(this, true)
-                multiple_task_option.setTextColor(resources.getColor(R.color.colorAccent))
-                ifMultipleOptionIsOn = true
+                multiple_task_option.setTextColor(ContextCompat.getColor(this, R.color.colorAccent))
+                true
             }
         }
 
@@ -82,6 +85,7 @@ class CreateTaskActivity : AppCompatActivity() {
         })
     }
 
+    @SuppressLint("SetTextI18n")
     fun onSaveTask(v: View) {
 
         if (validationDone()) {
@@ -113,13 +117,12 @@ class CreateTaskActivity : AppCompatActivity() {
 
     private fun validationDone(): Boolean {
         return if (task_title.text == null || task_title.text.trim().isEmpty()) {
-            displayErrorMsg("Please set the title for the task.")
+            displayErrorMsg("Please set a title for the task.")
         } else if (task_description.text == null || task_description.text.trim().isEmpty()) {
-            displayErrorMsg("Description: Just write the impact it would have on your day or life if it's done.") // TODO check english
+            displayErrorMsg("Set description or just write down the impact it will have on your day or life, if you complete it.") // TODO check english
         } else if (TaskDBTable(this).doesTitleAlreadyExists(task_title.text.toString())) {
             displayErrorMsg("Task Already Exists.")
-        }
-        else true
+        } else true
     }
 
     private fun displayErrorMsg(msg: String): Boolean {
@@ -130,8 +133,13 @@ class CreateTaskActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
-        onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
         return true
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
+        super.onBackPressed()
     }
 
 

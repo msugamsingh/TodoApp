@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/rv"
             android:background="@color/white"
             android:layout_width="match_parent"
@@ -20,4 +20,35 @@
               android:textColor="@color/colorAccent"
               android:layout_height="wrap_content"
               android:layout_gravity="center"/>
+
+    <android.support.design.button.MaterialButton android:layout_width="wrap_content"
+                                                  android:text="Play a game"
+                                                  android:layout_gravity="center_horizontal|bottom"
+                                                  android:layout_marginBottom="64dp"
+                                                  android:visibility="gone"
+                                                  android:id="@+id/play_a_game"
+                                                  app:cornerRadius="18dp"
+                                                  android:layout_height="wrap_content"/>
+
+    <android.support.design.button.MaterialButton android:layout_width="250dp"
+                                                  android:id="@+id/quote_of_the_day"
+                                                  android:layout_height="wrap_content"
+                                                  android:layout_marginTop="100dp"
+                                                  android:textColor="#f9f9f9"
+                                                  android:layout_gravity="center_horizontal"
+                                                  app:rippleColor="@color/lightf8"
+                                                  android:background="@color/lightGray"
+                                                  android:backgroundTint="@color/BlueGray"
+                                                  android:visibility="gone"
+                                                  app:cornerRadius="10dp"
+                                                  android:textAllCaps="false"
+                                                  android:fontFamily="sans-serif-light"
+                                                  app:layout_constraintTop_toTopOf="parent"
+                                                  app:layout_constraintEnd_toEndOf="parent"
+                                                  app:layout_constraintStart_toStartOf="parent"
+                                                  app:layout_constraintBottom_toBottomOf="parent"
+                                                  tools:targetApi="lollipop"/>
+
+
+
 </FrameLayout>

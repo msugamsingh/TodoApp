@@ -1,13 +1,18 @@
 <resources>
-    <string name="app_name">Todo App</string>
+    <string name="app_name">4TR Productivity App</string>
     <string name="action_settings">Settings</string>
     <string name="c_time">%d</string>
-    <string name="about">Timer App v1.0.0</string>
-    <string name="about_me">Sugam Singh (@msugamsingh)</string>
-    <string name="about_co">Forol, Inc. (@forolinc)</string>
-    <string name="completed_in">Completed In: %d min</string>
-    <string name="expeted_time">Expected Time: %d min</string>
+    <string name="completed_in">Completed In: %d m</string>
+    <string name="expected_time">Expected Time: %d m</string>
     <string name="time_result">Points: %s</string>
-    <string name="stopIn">Stop In: %s</string>
-    <string name="showExpectedTime">%d min</string>
+    <string name="stopIn">Stopped at: %s</string>
+    <string name="showExpectedTime">%d m.</string>
+    <string name="weeklyAverageValue">%d h</string>
+    <string name="weeklyTotalHours">%d h</string>
+    <string name="quoteForTheDayString">Quote Of The Day\n\n%s\n\nCLOSE</string>
+    <string name="expectedTime">%d m</string>
+    <string name="supportMe">The 4TR Productivity App is not just about timer or to-do, it\'s way more than that. I\'m
+        working really hard for this app, I assure every single user out there that more features and improvements will be there, But that won\'t happen
+        if you don\'t help me. \nPlease support me by sharing this app and rating this app 5 star on the Playstore.
+    </string>
 </resources>

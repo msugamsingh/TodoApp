@@ -1,19 +1,14 @@
 package com.msugamsingh.todoapp
 
-import android.annotation.SuppressLint
-import android.annotation.TargetApi
-import android.app.Activity
-import android.app.ActivityOptions
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.util.Log
+import android.support.v7.app.AlertDialog
 import android.view.*
 import android.widget.Toast
 import com.msugamsingh.todoapp.TimerActivity.TimerState.*
@@ -47,15 +42,6 @@ class FragmentTimer : Fragment() {
             alarmManager.cancel(pendingIntent)
             PrefUtil.setAlarmTime(context, 0)
         }
-
-        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        fun slideTransition(context: Context, activity: Activity) {
-            val options = ActivityOptions.makeSceneTransitionAnimation(activity)
-
-            val intent = Intent(context, SettingsActivity::class.java)
-            intent.putExtra("Anim_Key", "slideXML")
-            ContextCompat.startActivity(context, intent, options.toBundle())
-        }
     }
 
     private lateinit var timer: CountDownTimer
@@ -73,6 +59,7 @@ class FragmentTimer : Fragment() {
     private var secStr = ""
     private var initialTime = 0L
     private var recordedTime = 0L
+    private var timeForGraph = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,14 +91,14 @@ class FragmentTimer : Fragment() {
         with(v) {
             frag_one_liner_quote.text = oneLinerQuotes.random()
             frag_show_task_title.text = taskTitle
-            frag_show_expected_time.text = taskExpectedTime.toString()
+            frag_show_expected_time.text = resources.getString(R.string.expectedTime).format(taskExpectedTime)
             frag_show_description.text = taskDescription
             show_stopped_time.visibility = View.INVISIBLE
         }
 
 
         v.frag_timer_done_btn.setOnClickListener {
-            Toast.makeText(context!!, "Data taken. Check the task now!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context!!, "Data acquired. Mark the task now!", Toast.LENGTH_SHORT).show()
             FragmentMain.changeFragment(fragmentManager!!, FragmentMain())
         }
 
@@ -152,8 +139,8 @@ class FragmentTimer : Fragment() {
 
     private fun finishAndSaveTime() {
         timerStopIn = initialTime - timerStopAt
-        recordedTime = PrefUtil.getRecordedTime(context!!) + timerStopIn/60L
-        Log.d("TimeCalculation", "finishAndSaveTime(): recorded time: $recordedTime, pref: ${PrefUtil.getRecordedTime(context!!)}")
+        recordedTime = PrefUtil.getRecordedTime(context!!) + timerStopIn / 60L
+        timeForGraph = PrefUtil.getWorkTimeForGraph(context!!) + recordedTime / 60f
         if (timerState == Paused) onTimerFinished()
         else {
             timer.cancel()
@@ -182,7 +169,6 @@ class FragmentTimer : Fragment() {
     private fun initTimer() {
         timerState = PrefUtil.getTimerState(context!!)
 
-
         if (timerState == Stopped) setNewTimer()
         else setPreviousTimer()
 
@@ -200,21 +186,28 @@ class FragmentTimer : Fragment() {
     }
 
     private fun onTimerFinished() {
+
+
         timerState = Stopped
+        PrefUtil.setTimerState(context!!, timerState)
         setNewTimer()
         frag_progress_ring.max = timerLength.toInt()
         frag_progress_ring.progress = timerLength.toInt()
         PrefUtil.setTimeRemaining(context!!, timerLength)
         timeRemaining = timerLength
-        Log.d("TimeCalculation", "onTimerFinished(): recorded time: $recordedTime, pref: ${PrefUtil.getRecordedTime(context!!)}")
-        PrefUtil.setRecordingTime(context!!, recordedTime)  // Setting the recording time here, 'cause this fun gonna called in both conditions.
-        Log.d("TimeCalculation", "onTimerFinished(): recorded time: $recordedTime, pref: ${PrefUtil.getRecordedTime(context!!)}")
+        PrefUtil.setRecordingTime(
+            context!!,
+            recordedTime
+        )  // Setting the recording time here, 'cause this fun gonna called in both conditions.
+        PrefUtil.setWorkTimeForGraph(context!!, timeForGraph)     // Setting the graph time here
         updateButtons()
         updateCountdownUI()
+
+        activity!!.window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     private fun showStopTime(stopIn: Long) {
-        val showTime = "Stopped in: ${clockToShow(stopIn)}"
+        val showTime = "Stopped at: ${clockToShow(stopIn)}"
         show_stopped_time.text = showTime
         show_stopped_time.visibility = View.VISIBLE
     }
@@ -222,12 +215,18 @@ class FragmentTimer : Fragment() {
     // TIMER
     private fun startTimer() {
         timerState = Running
+        PrefUtil.setTimerState(context!!, timerState)
         PrefUtil.setTimerName(context!!, taskTitle)
+
+        activity!!.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        Toast.makeText(context!!, "Please do not lock the device.", Toast.LENGTH_LONG).show()
 
         timer = object : CountDownTimer(timeRemaining * 1000, 1000) {
             override fun onFinish() {
-                recordedTime = PrefUtil.getRecordedTime(context!!) + timerLength/60  // if timer completed, the recorded time will be the expected time for the first.
-                Log.d("TimeCalculation", "startTimer(): recorded time: $recordedTime, pref: ${PrefUtil.getRecordedTime(context!!)}")
+                recordedTime =
+                    PrefUtil.getRecordedTime(context!!) + timerLength / 60  // if timer completed, the recorded time will be the expected time for the first.
+                timeForGraph = PrefUtil.getWorkTimeForGraph(context!!) + recordedTime / 60f
+
                 onTimerFinished()
             }
 
@@ -243,7 +242,6 @@ class FragmentTimer : Fragment() {
     private fun setNewTimer() {
         val lengthInMin = PrefUtil.getTimerLength(context!!)
         timerLength = (lengthInMin * 60L)
-
         frag_progress_ring.max = timerLength.toInt()
     }
 
@@ -252,9 +250,7 @@ class FragmentTimer : Fragment() {
         frag_progress_ring.max = timerLength.toInt()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun updateCountdownUI() {
-        Log.d("TimerActivity", "updateUI called with $timeRemaining")
 
         frag_timer_countdown.text = clockToShow(timeRemaining)
         frag_progress_ring.progress = (timeRemaining).toInt()
@@ -292,7 +288,6 @@ class FragmentTimer : Fragment() {
 
     private fun refreshLayout() = FragmentMain.changeFragment(fragmentManager!!, FragmentTimer())
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.refresh_timer, menu)
     }
@@ -300,12 +295,25 @@ class FragmentTimer : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.refresh_timer_details -> {
-                PrefUtil.setTaskPref(context!!, "_ _", "_ _", 0)
-                refreshLayout()
+                if (PrefUtil.getTimerState(context!!) == Stopped) {
+                    PrefUtil.setTaskPref(context!!, "__", "__", 0)
+                    refreshLayout()
+                } else Toast.makeText(context!!, "Timer is running or paused.", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.menu_timer_info -> {
+                val dialog = AlertDialog.Builder(context!!)
+                dialog.setTitle("Don't lock the device!")
+                dialog.setMessage(
+                    "The screen will stay awake when the timer is running. Don't worry! " +
+                            "This won't drain much battery. Turn the brightness down and enable dark mode.\n(This will be solved really-really soon)"
+                )
+                dialog.setPositiveButton("Got it") { _: DialogInterface, _: Int ->
+                }
+                dialog.show()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

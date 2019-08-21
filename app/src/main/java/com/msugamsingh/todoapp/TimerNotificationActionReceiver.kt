@@ -16,7 +16,7 @@ import com.msugamsingh.todoapp.util.PrefUtil
 class TimerNotificationActionReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        when(intent.action) {
+        when (intent.action) {
             ACTION_STOP -> {
                 removeAlarm(context)
                 PrefUtil.setTimerState(context, TimerActivity.TimerState.Stopped)

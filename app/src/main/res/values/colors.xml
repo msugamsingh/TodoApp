@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00bfff</color>
+    <color name="colorPrimary">#00BFFF</color>
     <color name="colorPrimaryDark">#3BB6E4</color>
-    <color name="colorAccent">#00bfff</color>
-    <color name="highPriority">#BFFF1010</color>
+    <color name="colorAccent">#00BFFF</color>
+    <color name="highPriority">#FF0033</color>
     <color name="mediumPriority">#BFFFC108</color>
     <color name="lowPriority">#E634C93A</color>
     <color name="bottomNav">#CCFFFFFF</color>
     <color name="lightTextGrey">#757575</color>
     <color name="shadow">#66928E8E</color>
     <color name="electricBlue">#07A2E9</color>
-    <color name="slateGray">#05152E</color>
+    <color name="BlueGray">#05152E</color>
     <color name="white">#FFFFFF</color>
     <color name="lightGray">#DDDDDD</color>
+    <color name="lightf8">#f8f8f8</color>
     <color name="lightCyan">#8000BFFF</color>
+    <color name="iconColor">#1B1B1B</color>
+    <color name="mainCardColor">#FFFFFF</color>
+    <color name="cardStrokeColor">#00bfff</color>
+    <color name="completedColor">#D900BFFF</color>
 </resources>

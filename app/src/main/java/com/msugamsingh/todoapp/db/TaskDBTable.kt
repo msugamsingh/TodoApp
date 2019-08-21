@@ -47,7 +47,6 @@ class TaskDBTable(context: Context) {
 
     fun updateTaskDoneTime(task: Task, time: Long): Int {
         val db = dbHelper.writableDatabase
-        Log.d("TaskDBTable", "Updating")
         val values = ContentValues()
         values.put(DONE_TIME_COL, time)
 
@@ -122,13 +121,13 @@ class TaskDBTable(context: Context) {
 
 private inline fun <T> SQLiteDatabase.transaction(function: SQLiteDatabase.() -> T): T {
     this.beginTransaction()
-    val result = try {
-        val returnValue = this.function()
+    //    close() i moved this to finally block
+    return try {
+        val returnValue = function()
         setTransactionSuccessful()
         returnValue
     } finally {
         endTransaction()
+        close()
     }
-    close()
-    return result
 }

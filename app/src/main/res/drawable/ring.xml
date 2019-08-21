@@ -7,9 +7,4 @@
 
     <solid android:color="@color/colorAccent"/>
     <corners android:radius="2dp" />
-
-    <gradient android:startColor="@color/colorPrimaryDark"
-              android:endColor="@color/colorAccent"
-              android:useLevel="true"
-              android:type="sweep"/>
 </shape>

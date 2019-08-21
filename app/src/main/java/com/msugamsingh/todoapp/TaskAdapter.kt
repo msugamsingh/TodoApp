@@ -1,7 +1,6 @@
 package com.msugamsingh.todoapp
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ class TaskViewHolder(var itemLayout: View, private val taskClickListener: TaskAd
     }
 
     override fun onClick(v: View) {
-        Log.d("TaskViewHolder", "onClick of adapter called")
         taskClickListener.onTaskClick(adapterPosition)
     }
 
@@ -80,13 +78,11 @@ class CompletedTaskAdapter(var tasks: List<Task>) : RecyclerView.Adapter<Complet
 
     override fun onBindViewHolder(holder: CompletedTaskViewHolder, index: Int) {
         val task = tasks[index]
-        val resultTime = setResultTime(index)
-        Log.d("TaskAdapter", "onBindViewHolder: result is $resultTime")
         with(holder.itemLayout) {
             completed_task_description.text = task.description
             completed_task_title.text = task.title
             completed_task_completed_time.text = resources.getString(R.string.completed_in).format(task.doneTime)
-            completed_task_expected_time.text = resources.getString(R.string.expeted_time).format(task.expectedTime)
+            completed_task_expected_time.text = resources.getString(R.string.expected_time).format(task.expectedTime)
             time_result.text = resources.getString(R.string.time_result).format(setResultTime(index))
         }
     }

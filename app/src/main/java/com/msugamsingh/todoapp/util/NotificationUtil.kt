@@ -10,14 +10,11 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.support.v4.app.NotificationCompat
+import com.msugamsingh.todoapp.*
 import com.msugamsingh.todoapp.AppConstants.Companion.ACTION_PAUSE
 import com.msugamsingh.todoapp.AppConstants.Companion.ACTION_RESUME
 import com.msugamsingh.todoapp.AppConstants.Companion.ACTION_START
 import com.msugamsingh.todoapp.AppConstants.Companion.ACTION_STOP
-import com.msugamsingh.todoapp.MainActivity
-import com.msugamsingh.todoapp.R
-import com.msugamsingh.todoapp.TimerActivity
-import com.msugamsingh.todoapp.TimerNotificationActionReceiver
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,7 +37,7 @@ class NotificationUtil {
             val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER, true)
             nBuilder.setContentTitle("Time's Over")
                 .setContentText("Start Again?")
-                .setContentIntent( getPendingIntentWithStack(context, MainActivity::class.java) )       // when timer stops, clicking on notification will direct to mainActivity
+                .setContentIntent( getPendingIntentWithStack(context, MainActivity(FragmentTimer())::class.java) )       // when timer stops, clicking on notification will direct to mainActivity
                 .addAction(R.drawable.ic_play, "Start", startPendingIntent)
 
             val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -48,12 +45,6 @@ class NotificationUtil {
             nManager.notify(TIMER_ID, nBuilder.build())
 
         }
-
-//              setContentIntent FROM ABOVE
-//                will use stack here, means when we click on th notification, it will take
-//                us to some where and on pressing back button, we will be back to its top lair or its parent activity
-//                just like instagram when we click on a message notification and that bring up the conversation activity
-//                but when we presses back we wont come out of the app instead we get to home screen of instagram.
 
         fun showTimerPaused(context: Context) {
             val resumeIntent = Intent(context, TimerNotificationActionReceiver::class.java)
@@ -76,18 +67,14 @@ class NotificationUtil {
         }
 
             fun showTimerRunning(context: Context, wakeUpTime: Long) {
-//                leftTime = PrefUtil.getLeftTime(context)
-
-
-
                 val stopIntent = Intent(context, TimerNotificationActionReceiver::class.java)
                 stopIntent.action = ACTION_STOP
                 val stopPendingIntent = PendingIntent.getBroadcast(context, 0, stopIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT)
 
                 val pauseIntent = Intent(context, TimerNotificationActionReceiver::class.java)
-                stopIntent.action = ACTION_PAUSE
-                val pausePendingIntent = PendingIntent.getBroadcast(context, 0, stopIntent,
+                pauseIntent.action = ACTION_PAUSE
+                val pausePendingIntent = PendingIntent.getBroadcast(context, 0, pauseIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT)
 
 
@@ -98,26 +85,10 @@ class NotificationUtil {
                 val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER, true)
                 nBuilder.setContentTitle("Timer's Running.")
                     .setContentIntent( getPendingIntentWithStack(context, TimerActivity::class.java) )
-                    .setContentText("End: ${df.format(Date(wakeUpTime))}")
+                    .setContentText("Timer will stop at: ${df.format(Date(wakeUpTime))}")
                     .setOngoing(true)
                     .addAction(R.drawable.ic_stop, "Stop", stopPendingIntent)
                     .addAction(R.drawable.ic_pause, "Pause", pausePendingIntent)
-
-//                val noteTimer = object : CountDownTimer(leftTime.toLong(), 1000) {
-//                    override fun onFinish() {
-//                        leftTime = 0
-//                    }
-//
-//                    override fun onTick(millisUntilFinished: Long) {
-//                        Log.d("NotificationUtil", "onTick() called $leftTime")
-//                        leftTime--
-//                        val minsLeft = leftTime / 60
-//                        val secsLeft = leftTime - minsLeft * 60
-//                        Log.d("NotificationUtil", "onTick() end $leftTime")
-//                        nBuilder
-//                    }
-//                }.start()
-
                 val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 nManager.createNotificationChannel(CHANNEL_ID_TIMER, CHANNEL_NAME_TIMER, true)
                 nManager.notify(TIMER_ID, nBuilder.build())

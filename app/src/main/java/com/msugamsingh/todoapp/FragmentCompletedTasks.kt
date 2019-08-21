@@ -30,7 +30,7 @@ class FragmentCompletedTasks : Fragment() {
         v.clear_all.setOnClickListener {
             val dialog = AlertDialog.Builder(context!!)
             dialog.setTitle("Clear All?")
-            dialog.setMessage("This will clear completed tasks.")
+            dialog.setMessage("This will clear all completed tasks.")
             dialog.setPositiveButton("Clear All") { _: DialogInterface, _: Int ->
                 TaskDBTable(context!!).clearAllCompleted()
                 MainActivity.makeSound(context!!, R.raw.woosh_sound)
